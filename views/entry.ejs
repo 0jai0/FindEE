@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindEE</title>
+    
+</head>
+<body>
+    <style>
+        body{
+            background: #21252b;
+            color: #d3ddef;
+        }
+        .card {
+            height: 500px; 
+            overflow-y: auto; 
+            border: 10px solid #ccc; 
+            padding: 10px;
+        }
+        .card__content {
+            max-height: 100%; 
+        }
+        .card__img img {
+            max-width: 60%; 
+            max-height: 20%; 
+        }
+
+        .search-form {
+            position: absolute;
+            top: 35px; 
+            right: 20px; 
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .search-form label {
+            margin-right: 8px;
+            }
+
+            .search-form input[type="text"] {
+            padding: 6px;
+            border: none;
+            border-radius: 4px;
+            width: 250px;
+            outline: none;
+            }
+
+            .search-form button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            }
+
+            .search-form button:hover {
+            background-color: #0056b3;
+            }
+
+            
+            * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            }
+
+            header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #21252b;
+            color: white;
+            }
+
+
+            .logo {
+            width: 90px; 
+            height: 90px;
+            border-radius: 50%; 
+            overflow: hidden;
+            }
+
+            .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            }
+
+
+            .menu {
+            list-style: none;
+            display: flex;
+            padding-top: 10px;
+            padding-left: 50px;
+            justify-content: center;
+            
+            
+            }
+
+            .menu li {
+            margin: 0 10px;
+            }
+
+            .menu a {
+            text-decoration: none;
+            color: white;
+            }
+
+            .menu a:hover {
+            color: #ccc;
+            }
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+            .footer{
+            width:100%;
+            border-radius: 50%;
+            bottom: 5px;
+            transition: all 0.2s;
+            }
+
+            .copy{
+            background-color: #232f3e;
+            height: 90px;
+            padding:40px;
+            text-align: center;
+            }
+            .copy span{
+            color:white;
+            font-size: 14px;
+            }
+
+            .stop-scroll{
+            overflow: hidden;
+            height:100%;
+            }
+      </style>
+    <header>
+        <div class="logo">
+            <img src="https://drive.google.com/uc?id=120phk9-0t8VrLBvDvyBOXHPjC2LcjHU7" alt="Logo" class="logo-img">
+        </div>
+        <div>
+            <h1>FindEE</h1>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="/contribution">Contribution</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-form">
+            <form action="/Search" method="GET" >
+                <label for="searchQuery"></label>
+                <input type="text" id="searchQuery" name="query" placeholder="Enter search query">
+                <button type="submit">Search</button> 
+            </form>
+
+        </div>
+        
+        
+    </header>
+  <div class="card-container">
+    <% const displayCount = Math.min(result.rows.length); %>
+    <% for (let i = 0; i < displayCount; i++) { %>
+        <div class="card">
+            <div class="card__img">
+                <img src="https://drive.google.com/uc?id=<%= result.rows[i].question_photo %>" alt="">
+            </div>
+            <div class="card__content">
+                <h2>Question : </h2>
+                <p><%= result.rows[i].question_text %></p>
+            </div>
+            <div class="card__img">
+                <h2>Answer :</h2>
+                <% if (result.rows[i].solution_photo !== null) { %>
+                    <img src="https://drive.google.com/uc?id=<%= result.rows[i].solution_photo %>" alt="">
+                    <p>If solution is not correct you can Upload your solution here.</p>
+                    <form action="/uploadImage" method="post" enctype="multipart/form-data">
+                        <input id="fileInput" type="file" name="files" accept="image/*">
+                        <input type="hidden" name="questionId" value="<%= result.rows[i].question_id %>">
+                        <input type="submit" value="Upload Image">
+                    </form>
+                <% } else { %>
+                    <p>Answer is not solved you can upload your solution here.</p>
+                    <form action="/uploadImage" method="post" enctype="multipart/form-data">
+                        <input id="fileInput" type="file" name="files" accept="image/*">
+                        <input type="hidden" name="questionId" value="<%= result.rows[i].question_id %>">
+                        <input type="submit" value="Upload Image">
+                    </form>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+    
+
+  </div>
+  <br>
+  <br>
+  <section class="footer">
+        
+    <div class="copy">
+        <span>&copy; Designed by Malla Jaya Venkata Kiran</span>
+    </div>
+    </section>
+
+
+
+  <script>
+      document.getElementById("myButton").onclick = function () {
+            this.style.backgroundColor = "red";
+        };
+        
+        var fileInput = document.getElementById('fileInput');
+        var fileInputLabel = document.getElementById('fileInputLabel');
+
+        fileInput.addEventListener('change', function () {
+            if (fileInput.files && fileInput.files.length > 0) {
+                var fileName = '';
+                if (fileInput.files.length === 1) {
+                    fileName = fileInput.files[0].name;
+                } else {
+                    fileName = fileInput.files.length + ' files selected';
+                }
+                fileInputLabel.textContent = fileName;
+            } else {
+                fileInputLabel.textContent = 'Select Files';
+            }
+        });
+  </script>
+  
+</body>
+</html>

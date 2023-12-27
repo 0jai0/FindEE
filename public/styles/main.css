@@ -1,0 +1,275 @@
+
+body {
+  height: 100%;
+  overflow-y: auto;
+}
+body {
+  background: #21252b;
+
+  color: #d3ddef;
+}
+
+.card {
+  width: calc(20% - 10px);
+  --main-color: #000;
+  --submain-color: #78858F;
+  --bg-color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  position: relative;
+  width: 300px;
+  height: 384px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--bg-color);
+}
+
+.card__img {
+  height: 192px;
+  width: 100%;
+}
+
+.card__img svg {
+  height: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.card__avatar {
+  position: absolute;
+  width: 114px;
+  height: 114px;
+  background: var(--bg-color);
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: calc(50% - 57px);
+  color: var(--main-color);
+}
+
+.card__title {
+  margin-top: 60px;
+  font-weight: 500;
+  font-size: 28px;
+  color: var(--main-color);
+}
+
+.card__subtitle {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--submain-color);
+}
+
+.card__btn {
+  margin-top: 15px;
+  width: 76px;
+  height: 31px;
+  border: 2px solid var(--main-color);
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--main-color);
+  background: var(--bg-color);
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.card__btn-solid {
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+
+.card__btn:hover {
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+
+.card__btn-solid:hover {
+  background: var(--bg-color);
+  color: var(--main-color);
+}
+.search-form {
+  position: absolute;
+  top: 35px; 
+  right: 20px; 
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-form label {
+  margin-right: 8px;
+}
+
+.search-form input[type="text"] {
+  padding: 6px;
+  border: none;
+  border-radius: 4px;
+  width: 250px;
+  outline: none;
+}
+
+.search-form button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.search-form button:hover {
+  background-color: #0056b3;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #21252b;
+  color: white;
+}
+
+
+.logo {
+  width: 90px; 
+  height: 90px;
+  border-radius: 50%; 
+  overflow: hidden;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+
+.menu {
+  list-style: none;
+  display: flex;
+  padding-top: 10px;
+  padding-left: 50px;
+  justify-content: center;
+  
+  
+}
+
+.menu li {
+  margin: 0 10px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: white;
+}
+
+.menu a:hover {
+  color: #ccc;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 100%; 
+  }
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #000;
+}
+
+#selectedElements {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.custom-file-input {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.custom-file-input input[type="file"] {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0;
+}
+
+#fileInputLabel {
+  cursor: pointer;
+  padding: 8px 15px;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+#fileInputLabel:hover {
+  background-color: #2980b9;
+}
+
+#myButton {
+  padding: 10px 15px;
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#myButton:hover {
+  background-color: #27ae60;
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+.footer{
+  width:100%;
+  border-radius: 50%;
+  bottom: 5px;
+  transition: all 0.2s;
+  
+}
+
+.copy{
+  background-color: #232f3e;
+  height: 90px;
+  padding:40px;
+  text-align: center;
+}
+.copy span{
+  color:white;
+  font-size: 14px;
+}
+
+.stop-scroll{
+  overflow: hidden;
+  height:100%;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FindEE</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://drive.google.com/uc?id=120phk9-0t8VrLBvDvyBOXHPjC2LcjHU7" alt="Logo" class="logo-img">
+        </div>
+        <div>
+            <h1>FindEE</h1>
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="/contribution">Contribution</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-form">
+            <form action="/Search" method="GET" >
+                <label for="searchQuery"></label>
+                <input type="text" id="searchQuery" name="query" placeholder="Enter search query">
+                <button type="submit">Search</button> 
+            </form>
+
+        </div>
+        
+        
+    </header>
+    <div class="card-container">
+        <% if (entries && entries.length) { %>
+            <% entries.forEach(entry => { %>
+                <div class="card1">
+                    <div class="card">
+                        <div class="card__img">
+                            <img width="100%" height="100%" src="https://drive.google.com/uc?id=1rZmK3sHcuRMuYqaxYGvKF-SdN3PaL_Do" alt="">
+                        </div>
+                        <div class="card__avatar"><svg></svg>
+                        </div>
+                        <div class="card__title"><%= entry.subject %></div>
+                        <div class="card__subtitle">Solutions</div>
+                        <div class="card__wrapper">
+                            <a href="/entry/<%= entry.subject %>" class="card__btn">OPEN</a>
+                        </div>
+                    </div>
+                  
+                </div>
+              
+            <% }) %>
+          <% } else { %>
+            <p>No entries found</p>
+          <% } %>
+        <div class="card1">
+            <div class="card">
+                <form id="uploadForm" action="/upload" method="post">
+                    <div class="left-floated-list">
+                        <label for="selectedElements">Select Subject:</label>
+                        <select id="selectedElements" name="selectedElements" multiple></select>
+                    </div>
+                    <div class="custom-file-input">
+                        <input id="fileInput" type="file" name="Files" required multiple />
+                        <label for="fileInput" id="fileInputLabel">Select Files</label>
+                    </div>
+                    <button id="myButton" type="submit">Submit</button>
+                  
+                </form>
+                
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <section bottom="0px" class="footer">
+        
+        <div class="copy">
+            <span>&copy; Designed by Malla Jaya Venkata Kiran</span>
+        </div>
+    </section>
+
+    
+</body>
+
+
+
+
+<script>
+
+
+
+
+  document.getElementById("myButton").onclick = function () {
+      this.style.backgroundColor = "red";
+  };
+  
+  var fileInput = document.getElementById('fileInput');
+  var fileInputLabel = document.getElementById('fileInputLabel');
+
+  fileInput.addEventListener('change', function () {
+      if (fileInput.files && fileInput.files.length > 0) {
+          var fileName = '';
+          if (fileInput.files.length === 1) {
+              fileName = fileInput.files[0].name;
+          } else {
+              fileName = fileInput.files.length + ' files selected';
+          }
+          fileInputLabel.textContent = fileName;
+      } else {
+          fileInputLabel.textContent = 'Select Files';
+      }
+  });
+
+
+  const formElem = document.getElementById('uploadForm');
+  formElem.addEventListener('submit', async (e) => {
+      console.log("form submitting")
+      e.preventDefault();
+      await fetch('/upload', {
+          method: 'POST',
+          body: new FormData(formElem),
+      }).then(response => {
+          document.querySelector('p').textContent = "Successfully uploaded to drive";
+          document.getElementById("myButton").style.backgroundColor = "green"
+          document.getElementById('fileInputLabel').textContent = "Select Files";
+          document.querySelector('p').style.display = 'block';
+          console.log(response);
+      }).catch(error => {
+          document.querySelector('p').textContent = "Was not uploaded" + error;
+          document.querySelector('p').style.display = 'block';
+          console.error(error);
+      });
+  });
+
+
+  fetch('/options')
+            .then(response => response.json())
+            .then(options => {
+                const selectElement = document.getElementById('selectedElements');
+                options.forEach(optionValue => {
+                    const option = document.createElement('option');
+                    option.value = optionValue;
+                    option.textContent = optionValue;
+                    selectElement.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching options:', error));
+
+
+
+
+            document.querySelectorAll('.card__btn').forEach(button => {
+            button.addEventListener('click', (event) => {
+                
+                event.preventDefault();
+                
+                window.location.href = event.target.href;
+            });
+            });
+
+</script>
+
+
+
+</html>
