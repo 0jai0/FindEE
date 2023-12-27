@@ -15,11 +15,7 @@ const port = process.env.PORT || 3000;
 
 
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "FindEE",
-  password: "Kiranmjv1027@",
-  port: process.env.PG_PORT,
+  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
 });
 
 
