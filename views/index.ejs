@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="https://drive.google.com/uc?id=120phk9-0t8VrLBvDvyBOXHPjC2LcjHU7" alt="Logo" class="logo-img">
+            <img src="https://drive.google.com/thumbnail?id=120phk9-0t8VrLBvDvyBOXHPjC2LcjHU7&sz=w1000" alt="Logo" class="logo-img">
         </div>
         <div>
             <h1>FindEE</h1>
@@ -42,7 +42,7 @@
                 <div class="card1">
                     <div class="card">
                         <div class="card__img">
-                            <img width="100%" height="100%" src="https://drive.google.com/uc?id=1rZmK3sHcuRMuYqaxYGvKF-SdN3PaL_Do" alt="">
+                            <img width="100%" height="100%" src="https://drive.google.com/thumbnail?id=1rZmK3sHcuRMuYqaxYGvKF-SdN3PaL_Do&sz=w1000" alt="">
                         </div>
                         <div class="card__avatar"><svg></svg>
                         </div>
@@ -61,7 +61,7 @@
           <% } %>
         <div class="card1">
             <div class="card">
-                <form id="uploadForm" action="/upload" method="post">
+                <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
                     <div class="left-floated-list">
                         <label for="selectedElements">Select Subject:</label>
                         <select id="selectedElements" name="selectedElements" multiple></select>
@@ -70,7 +70,7 @@
                         <input id="fileInput" type="file" name="Files" required multiple />
                         <label for="fileInput" id="fileInputLabel">Select Files</label>
                     </div>
-                    <button id="myButton" type="submit">Submit</button>
+                    <input id="myButton" type="submit" value="Upload Image" />
                   
                 </form>
                 
@@ -98,47 +98,12 @@
 
 
 
-  document.getElementById("myButton").onclick = function () {
+
+  
+document.getElementById("myButton").onclick = function () {
       this.style.backgroundColor = "red";
   };
-  
-  var fileInput = document.getElementById('fileInput');
-  var fileInputLabel = document.getElementById('fileInputLabel');
 
-  fileInput.addEventListener('change', function () {
-      if (fileInput.files && fileInput.files.length > 0) {
-          var fileName = '';
-          if (fileInput.files.length === 1) {
-              fileName = fileInput.files[0].name;
-          } else {
-              fileName = fileInput.files.length + ' files selected';
-          }
-          fileInputLabel.textContent = fileName;
-      } else {
-          fileInputLabel.textContent = 'Select Files';
-      }
-  });
-
-
-  const formElem = document.getElementById('uploadForm');
-  formElem.addEventListener('submit', async (e) => {
-      console.log("form submitting")
-      e.preventDefault();
-      await fetch('/upload', {
-          method: 'POST',
-          body: new FormData(formElem),
-      }).then(response => {
-          document.querySelector('p').textContent = "Successfully uploaded to drive";
-          document.getElementById("myButton").style.backgroundColor = "green"
-          document.getElementById('fileInputLabel').textContent = "Select Files";
-          document.querySelector('p').style.display = 'block';
-          console.log(response);
-      }).catch(error => {
-          document.querySelector('p').textContent = "Was not uploaded" + error;
-          document.querySelector('p').style.display = 'block';
-          console.error(error);
-      });
-  });
 
 
   fetch('/options')
